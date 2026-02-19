@@ -13,5 +13,5 @@ export const createUser = async (email, passwordHash) => {
     "INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING id, email",
     [email, passwordHash]
   );
-  return result.rows[0];
+  return result;
 };

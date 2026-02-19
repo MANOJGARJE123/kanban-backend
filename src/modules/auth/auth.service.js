@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
-import { createUser, findUserByEmail } from './auth.repository.js';
+import { createUser as createUserRepo, findUserByEmail as findUserByEmailRepo } from './auth.repository.js';
 import { generateJwtToken } from '../../utils/jwt.js';
 
 
 export const register = async (data) => {
-    const existingUser = await findUserByEmail(data.email);
+    const existingUser = await findUserByEmailRepo(data.email);
 
     if (existingUser) {
         throw new Error('User already exists');
@@ -12,7 +12,7 @@ export const register = async (data) => {
 
     const hashedPassword = await bcrypt.hash(data.password, 10);
 
-    const result = await createUser(data.email, hashedPassword);
+    const result = await createUserRepo(data.email, hashedPassword);
 
     return {
         id: result.rows[0].id,
@@ -21,7 +21,7 @@ export const register = async (data) => {
 };
 
 export const login = async (data) => {
-    const user = await findUserByEmail(data.email);
+    const user = await findUserByEmailRepo(data.email);
 
     if (!user) {
         throw new Error('Invalid email or password');
