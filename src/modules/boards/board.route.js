@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.post('/', boardController.createBoard);
 router.get('/:id', boardController.getBoardById);
+router.get('/organization/:organizationId', boardController.getBoardsByOrganizationId);
 
 export default router;  
