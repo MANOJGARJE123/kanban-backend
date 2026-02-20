@@ -2,6 +2,8 @@ import { createOrganization as createOrganizationService, getOrganizationById as
 
 export const createOrganization = async (req, res, next) => {
     try {
+        console.log('Request body', req.body);
+        console.log('Content-Type', req.headers['content-type']);
         const data = await createOrganizationService(req.body);
         res.status(201).json(data);
     } catch (error) {

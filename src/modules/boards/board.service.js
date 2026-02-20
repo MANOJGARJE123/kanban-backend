@@ -1,4 +1,3 @@
-import boardController from './board.controller.js';
 import { createBoard as createBoardRepo, getBoardById as getBoardByIdRepo, getAllBoardsOrganizationId as getAllBoardsOrganizationIdRepo } from './board.repository.js';
 
 export const createBoard = async (data) => {
@@ -12,6 +11,6 @@ export const getBoardById = async (id) => {
 }
 
 export const getAllBoardsOrganizationId = async (organizationId) => {
-    const result = await boardController.getAllBoardsOrganizationId(organizationId);
+    const result = await getAllBoardsOrganizationIdRepo(organizationId);
     return result;
 }
