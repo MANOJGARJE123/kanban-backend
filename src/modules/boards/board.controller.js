@@ -18,7 +18,6 @@ export const getBoardsByOrganizationId = async (req, res, next) => {
     }
 }
 
-
 export const getBoardById = async (req, res, next) => {
     try {
         const data = await boardService.getBoardById(req.params.id);
