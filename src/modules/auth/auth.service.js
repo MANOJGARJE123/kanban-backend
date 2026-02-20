@@ -43,10 +43,3 @@ export const login = async (data) => {
     };
 };
 
-export const refresh = async (refreshToken) => {
-    const token = generateJwtToken({ refreshToken });
-    
-    return {
-        token
-    };
-};
