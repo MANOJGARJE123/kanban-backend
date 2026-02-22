@@ -29,7 +29,7 @@ export const reorderColumns = async (req, res, next) => {
 
 export const deleteColumn = async (req, res, next) => {
     try {
-        const columnId = req.params.id || req.body.id;
+        const columnId = req.params.id;
         const data = await columnServices.deleteColumn(columnId);
         res.status(200).json(data);
     } catch (error) {
