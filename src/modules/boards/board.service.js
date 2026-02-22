@@ -1,6 +1,12 @@
 import { createBoard as createBoardRepo, getBoardById as getBoardByIdRepo, getAllBoardsOrganizationId as getAllBoardsOrganizationIdRepo, deleteBoard as deleteBoardRepo } from './board.repository.js';
 
 export const createBoard = async (data) => {
+    if (!data.name || !data.organization_id) {
+        const error = new Error('Board name and organization_id are required');
+        error.statusCode = 400;
+        throw error;
+    }
+
     const result = await createBoardRepo(data);
     return result;
 }

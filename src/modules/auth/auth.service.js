@@ -4,6 +4,12 @@ import { generateJwtToken } from '../../utils/jwt.js';
 
 
 export const register = async (data) => {
+    if (!data.email || !data.password) {
+        const error = new Error('Email and password are required');
+        error.statusCode = 400;
+        throw error;
+    }
+
     const existingUser = await findUserByEmailRepo(data.email);
 
     if (existingUser) {
@@ -21,6 +27,12 @@ export const register = async (data) => {
 };
 
 export const login = async (data) => {
+    if (!data.email || !data.password) {
+        const error = new Error('Email and password are required');
+        error.statusCode = 400;
+        throw error;
+    }
+
     const user = await findUserByEmailRepo(data.email);
 
     if (!user) {

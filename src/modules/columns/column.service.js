@@ -1,6 +1,12 @@
 import { createColumn as createColumnRepo, getColumnById as getColumnByIdRepo, getColumnsByBoardId as getColumnsByBoardIdRepo, updateColumnPosition as updateColumnPositionRepo, deleteColumn as deleteColumnRepo } from './column.repository.js';
 
 export const createColumn = async (data) => {
+    if (!data.name || !data.board_id || data.position === undefined) {
+        const error = new Error('Column name, board_id, and position are required');
+        error.statusCode = 400;
+        throw error;
+    }
+
     const result = await createColumnRepo(data);
     return result;
 };
