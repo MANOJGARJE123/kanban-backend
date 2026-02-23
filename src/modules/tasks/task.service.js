@@ -27,14 +27,14 @@ export const updateTask = async (id, data) => {
     return result;
 };
 
-export const moveTask = async (id, columnId, position) => {
-    if (!columnId || position === undefined) {
-        const error = new Error('columnId and position are required');
+export const moveTask = async (id, column_id, position) => {
+    if (!column_id || position === undefined) {
+        const error = new Error('column_id and position are required');
         error.statusCode = 400;
         throw error;
     }
 
-    const result = await moveTaskRepo(id, columnId, position);
+    const result = await moveTaskRepo(id, column_id, position);
     return result;
 };
 

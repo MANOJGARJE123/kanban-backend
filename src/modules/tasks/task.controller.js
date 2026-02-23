@@ -30,8 +30,8 @@ export const updateTask = async (req, res, next) => {
 
 export const moveTask = async (req, res, next) => {
     try {
-        const { columnId, position } = req.body;
-        const data = await taskServices.moveTask(req.params.id, columnId, position);
+        const { taskId, column_id, position } = req.body;
+        const data = await taskServices.moveTask(taskId, column_id, position);
         res.status(200).json({ success: true, data });
     } catch (error) {
         next(error);

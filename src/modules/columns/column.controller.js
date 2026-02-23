@@ -20,7 +20,8 @@ export const getColumnById = async (req, res, next) => {
 
 export const reorderColumns = async (req, res, next) => {
     try {
-        const data = await columnServices.reorderColumns(req.body);
+        const { columns } = req.body;
+        const data = await columnServices.reorderColumns(columns);
         res.status(200).json({ success: true, data });
     } catch (error) {
         next(error);
