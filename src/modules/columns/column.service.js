@@ -1,4 +1,10 @@
-import { createColumn as createColumnRepo, getColumnById as getColumnByIdRepo, getColumnsByBoardId as getColumnsByBoardIdRepo, updateColumnPosition as updateColumnPositionRepo, deleteColumn as deleteColumnRepo } from './column.repository.js';
+import { createColumn as createColumnRepo, 
+    getColumnById as getColumnByIdRepo, 
+    getColumnsByBoardId as getColumnsByBoardIdRepo, 
+    updateColumnPosition as updateColumnPositionRepo, 
+    deleteColumn as deleteColumnRepo,
+    fetchColumnsOfBoard as fetchColumnsOfBoardRepo
+ } from './column.repository.js';
 
 export const createColumn = async (data) => {
     if (!data.name || !data.board_id || data.position === undefined) {
@@ -35,12 +41,12 @@ export const deleteColumn = async (id) => {
     return result;
 };
 
-export const fetchCoumnsOfBoard = async (boardId) => {
+export const fetchColumnsOfBoard = async (boardId) => {
     if (!boardId) {
         const error = new Error('boardId is required');
         error.statusCode = 400;
         throw error;
     }
-    const result = await getColumnsByBoardIdRepo(boardId);
+    const result = await fetchColumnsOfBoardRepo(boardId);
     return result;
 }

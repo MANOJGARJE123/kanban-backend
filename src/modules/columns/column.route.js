@@ -4,7 +4,7 @@ import isAuth from '../../middlewares/isAuth.js';
 
 const router = express.Router();
 
-router.get('/board/:boardId', isAuth, columnController.fetchCoumnsOfBoard);
+router.get('/board/:boardId', isAuth, columnController.fetchColumnsOfBoard);
 
 router.post('/', isAuth, columnController.createColumn);
 router.patch('/reorder', isAuth, columnController.reorderColumns);

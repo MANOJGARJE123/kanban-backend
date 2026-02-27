@@ -37,3 +37,13 @@ export const deleteColumn = async (req, res, next) => {
         next(error);
     }
 }
+
+export const fetchColumnsOfBoard = async (req, res, next) => {
+    try {
+        const { boardId } = req.params;
+        const data = await columnServices.fetchColumnsOfBoard(boardId);
+        res.status(200).json({ success: true, data });
+    } catch (error) {
+        next(error);
+    }
+}
