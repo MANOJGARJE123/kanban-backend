@@ -47,3 +47,33 @@ export const deleteTask = async (req, res, next) => {
         next(error);
     }
 };
+
+export const assignTask = async (req, res, next) => {
+    try {
+        const {taskId, userId} = req.body;
+        const data = await taskServices.assignTask(taskId, userId);
+        res.status(200).json({ success: true, message: "Task assigned successfully", data });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const fetchUserTasks = async (req, res, next) => {
+    try {
+        const userId = req.params.userId;
+        const data = await taskServices.fetchUserTasks(userId);
+        res.status(200).json({ success: true, message: "User tasks fetched successfully", data });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getTaskOfColumn = async (req, res, next) => {
+    try {
+        const columnId = req.params.columnId;
+        const data = await taskServices.getTaskOfColumn(columnId);
+        res.status(200).json({ success: true, message: "Tasks of column fetched successfully", data });
+    } catch (error) {
+        next(error);
+    }
+}

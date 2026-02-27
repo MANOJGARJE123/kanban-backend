@@ -67,7 +67,7 @@ export const deleteUserFromOrganization = async (req, res, next) => {
 };
 export const getUserOrganizations = async (req, res, next) => {
     try {
-        const data = await getUserOrganizationsService(req.user.id);
+        const data = await getUserOrganizationsService(req.params.userId);
         res.status(200).json({ success: true, data });
     } catch (error) {
         next(error);

@@ -44,12 +44,6 @@ export const addUserToOrganization = async (userId, organizationId) => {
             [userId, organizationId]
         );
         const details = detailsResult.rows[0] || {};
-        logger.debug('Adding user to organization', {
-            userId,
-            organizationId,
-            userEmail: details.user_email,
-            organizationName: details.organization_name
-        });
         const result = await pool.query(
             'INSERT into user_organizations (user_id, organization_id) values ($1, $2) returning user_id, organization_id, created_at',
             [userId, organizationId]

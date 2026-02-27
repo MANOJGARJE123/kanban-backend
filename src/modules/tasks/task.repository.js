@@ -54,3 +54,31 @@ export const deleteTask = async (id) => {
     );
     return result.rows[0];
 };
+
+export const assignTask = async (taskId, userId) => {
+    const result = await pool.query(
+        'INSERT INTO task_assignments (task_id, user_id) VALUES ($1, $2) RETURNING task_id, user_id, assigned_at',
+        [taskId, userId]
+    );
+    return result.rows[0];  
+}
+
+export const fetchUserTasks = async (userId) => {
+    const result = await pool.query(
+        `select t.id, t.title, t.description, t.column_id, t.position, t.created_at 
+         from tasks t 
+         join task_assignments ta on t.id = ta.task_id 
+         where ta.user_id = $1
+         order by t.created_at desc`,
+        [userId]
+    );
+    return result.rows;
+}
+
+export const getTaskOfColumn = async (columnId) => {
+    const result = await pool.query(
+        'SELECT id, title, description, column_id, position, created_at FROM tasks WHERE column_id = $1 ORDER BY position',
+        [columnId]
+    )
+    return result.rows;
+}   

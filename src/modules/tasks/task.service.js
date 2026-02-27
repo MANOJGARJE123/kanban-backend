@@ -1,4 +1,13 @@
-import { createTask as createTaskRepo, getTasks as getTasksRepo, updateTask as updateTaskRepo, moveTask as moveTaskRepo, deleteTask as deleteTaskRepo } from './task.repository.js';
+import { 
+    createTask as createTaskRepo,
+    getTasks as getTasksRepo,
+    updateTask as updateTaskRepo,
+    moveTask as moveTaskRepo, 
+    deleteTask as deleteTaskRepo, 
+    assignTask as assignTaskRepo,
+    fetchUserTasks as fetchUserTasksRepo,
+    getTaskOfColumn as getTaskOfColumnRepo
+} from './task.repository.js';
 
 export const createTask = async (data) => {
     if (!data.title || !data.column_id || data.position === undefined) {
@@ -47,3 +56,36 @@ export const deleteTask = async (id) => {
     const result = await deleteTaskRepo(id);
     return result;
 };
+
+export const assignTask = async (taskId, userId) => {
+    if (!taskId || !userId) {
+        const error = new Error('taskId and userId are required');
+        error.statusCode = 400;
+        throw error;
+    }
+
+    const result = await assignTaskRepo(taskId, userId);
+    return result;
+}
+
+export const fetchUserTasks = async (userId) => {
+    if (!userId) {
+        const error = new Error('userId is required');
+        error.statusCode = 400;
+        throw error;
+    }
+
+    const result = await fetchUserTasksRepo(userId);  
+    return result;
+}
+
+export const getTaskOfColumn = async (columnId) => {
+    if (!columnId) {
+        const error = new Error('columnId is required');
+        error.statusCode = 400;
+        throw error;
+    }
+
+    const result = await getTaskOfColumnRepo(columnId);
+    return result;
+}
