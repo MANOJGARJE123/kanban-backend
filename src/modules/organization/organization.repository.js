@@ -95,7 +95,6 @@ export const getUserOrganizations = async (userId) => {
         'select o.id, o.name from organizations o join user_organizations uo on o.id = uo.organization_id where uo.user_id = $1',
         [userId]
     )
-    logger.debug(`Fetched organizations for user ${userId}: ${result.rows.length} organizations found`);
     return result.rows;
 }
 
